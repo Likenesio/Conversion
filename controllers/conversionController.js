@@ -3,6 +3,7 @@ const axios = require("axios");
 
 const insert = (req, res) => {
     let conversion = new Conversion();
+    conversion.valor_moneda = req.body.valor_moneda;
     conversion.monto_origen = req.body.monto_origen;
     conversion.monto_conversion = req.body.monto_conversion;
     conversion.fecha_actividad = req.body.fecha_actividad;
