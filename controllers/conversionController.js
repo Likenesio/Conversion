@@ -11,8 +11,8 @@ const insert = (req, res) => {
     conversion.usuario = req.body.usuario;
     conversion
       .save()
-      .then((clienteNuevo) => {
-        res.status(200).send({ clienteNuevo });
+      .then((conversionNueva) => {
+        res.status(200).send({ conversionNueva });
       })
       .catch((err) => {
         res.status(500).send({ mensaje: "error al insert conversion:" + err });
