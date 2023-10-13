@@ -1,6 +1,6 @@
 'use strict'
-
 const express = require('express');
+require('dotenv').config();
 const bodyParser = require('body-parser');
 const app = express();
 var cors = require('cors');
@@ -28,12 +28,12 @@ const options = {
     socketTimeoutMS: 45000,
     family: 4, // Use IPv4, skip trying IPv6
 }
-const db_host = "127.0.0.1";
-const db_port = "27017"
-const db_name = "prueba";
-const port = "3000";
-
-mongoose.connect(`mongodb://${db_host}:${db_port}/${db_name}`, options)
+const db_host = process.env.DB_HOST;
+const db_port = process.env.DB_PORT
+//const db_name = process.env.DB_NAME;
+const port = process.env.PORT;
+//mongodb://mongo:G8s0ng0RWSxZakYIWwRs@containers-us-west-185.railway.app:7145
+mongoose.connect(`mongodb://${db_host}:${db_port}`, options)
 .then(() => console.log('> Successfully connected to DB')).catch(err => console.log(err))
 
 app.listen(port, () => {
