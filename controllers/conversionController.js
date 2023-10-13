@@ -7,7 +7,7 @@ const insert = (req, res) => {
     conversion.monto_origen = req.body.monto_origen;
     conversion.monto_conversion = req.body.monto_conversion;
     conversion.fecha_actividad = req.body.fecha_actividad;
-    conversion.fecha_conversion = req.body.valor_moneda;
+    conversion.fecha_conversion = req.body.fecha_conversion;
     conversion.usuario = req.body.usuario;
     conversion
       .save()
