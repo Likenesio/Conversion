@@ -22,7 +22,7 @@ const insert = (req, res) => {
 
 let historialConversion = async (req, res) => {
   try {
-    const conversiones = await Conversion.find().exec();
+    const conversiones = await Conversion.find().populate("usuario").exec();
     res.status(200).json(conversiones);
   } catch (error) {
     console.error(error);
