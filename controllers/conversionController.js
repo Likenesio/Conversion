@@ -32,7 +32,7 @@ let historialConversion = async (req, res) => {
   }
 };
 
-let exportarExcel = async (req, res) => {
+const exportarExcel = async (req, res) => {
   try {
     const conversiones = await Conversion.find().exec();
 
@@ -45,14 +45,25 @@ let exportarExcel = async (req, res) => {
     const csvWriter = createCsvWriter({
       path: "historial_conversiones.csv",
       header: [
-        { id: "usuario", title: "usuario" },
-        { id: "monto_uf", title: "Monto en UF" },
+        { id: "usuario", title: "Usuario" },
+        { id: "monto_origen", title: "Monto Origen" },
+        { id: "monto_conversion", title: "Monto Conversión" },
+        { id: "fecha_actividad", title: "Fecha de Actividad" },
         { id: "fecha_conversion", title: "Fecha de Conversión" },
-        { id: "monto_clp", title: "Monto en CLP" },
+        { id: "valor_moneda", title: "Valor de la Moneda" },
       ],
     });
 
-    csvWriter.writeRecords(conversiones).then(() => {
+    const records = conversiones.map(conversion => ({
+      usuario: conversion.usuario,
+      monto_origen: conversion.monto_origen,
+      monto_conversion: conversion.monto_conversion,
+      fecha_actividad: conversion.fecha_actividad,
+      fecha_conversion: conversion.fecha_conversion,
+      valor_moneda: conversion.valor_moneda
+    }));
+
+    csvWriter.writeRecords(records).then(() => {
       res
         .status(200)
         .json({ message: "Historial de conversiones exportado a CSV" });
@@ -64,5 +75,6 @@ let exportarExcel = async (req, res) => {
       .json({ message: "Error al exportar el historial de conversiones" });
   }
 };
+
 
 module.exports = { insert, historialConversion, exportarExcel };
