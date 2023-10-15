@@ -32,7 +32,7 @@ let historialConversion = async (req, res) => {
   }
 };
 
-const exportarExcel = async (req, res) => {
+/*const exportarExcel = async (req, res) => {
   try {
     const conversiones = await Conversion.find().exec();
 
@@ -74,7 +74,7 @@ const exportarExcel = async (req, res) => {
       .status(500)
       .json({ message: "Error al exportar el historial de conversiones" });
   }
-};
+};*/
 
 
-module.exports = { insert, historialConversion, exportarExcel };
+module.exports = { insert, historialConversion};
